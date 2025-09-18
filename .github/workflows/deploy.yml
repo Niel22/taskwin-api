@@ -33,14 +33,14 @@ jobs:
           port: 21098
           script: |
             cd ~
-            if [ ! -d "api.task-win.com/.git" ]; then
-              git clone git@github.com:Niel22/taskwin-api.git api.task-win.com
+            if [ ! -d "pay.womarkbuy.com/.git" ]; then
+              git clone git@github.com:Niel22/taskwin-api.git pay.womarkbuy.com
             else
-              cd api.task-win.com
+              cd pay.womarkbuy.com
               git pull origin main
             fi
 
-            cd api.task-win.com
+            cd pay.womarkbuy.com
             composer install --no-dev --prefer-dist --optimize-autoloader
             if [ ! -f ".env" ]; then
                 cp .env.example .env
