@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://task-win.com', 'www.task-win.com', 'https://www.task-win.com'],
+    'allowed_origins' => ['https://task-win.com', 'www.task-win.com', 'https://www.task-win.com', "http://localhost:5173"],
 
     'allowed_origins_patterns' => [],
 
