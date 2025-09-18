@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'referral_code',
+        'role',
+        'active'
     ];
 
     /**
@@ -44,5 +50,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            if(isset($user->role) && $user->role === (RoleEnum::ADMIN)->value) return;
+
+            $user->referral_code = self::generateReferralCode();
+        });
+    }
+
+    protected static function generateReferralCode($length = 8)
+    {
+        $code = strtoupper(bin2hex(random_bytes($length / 2))); 
+
+        if (self::where('referral_code', $code)->exists()) {
+            return self::generateReferralCode($length);
+        }
+
+        return $code;
+    }
+
+    public function isAdmin(){
+        return $this->role === "admin";
     }
 }
