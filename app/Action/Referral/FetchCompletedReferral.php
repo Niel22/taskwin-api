@@ -33,22 +33,22 @@ class FetchCompletedReferral{
 
         if ($promoterId) {
             $query->where('promoter_id', $promoterId);
+            
+            $totalCompletions = $query->where('completed', true)->count();
+            $totalEarnings = $totalCompletions * 10;
+            
+            $thisMonth = (clone $query)
+                ->where('completed', true)
+                ->whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year)
+                ->count();
+    
+            $referrals->stats = [
+                'total_completions' => $totalCompletions,
+                'total_earnings' => number_format($totalEarnings, 2),
+                'this_month' => $thisMonth,
+            ];
         }
-
-        $totalCompletions = $query->where('completed', true)->count();
-        $totalEarnings = $totalCompletions * 10;
-        
-        $thisMonth = (clone $query)
-            ->where('completed', true)
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->count();
-
-        $referrals->stats = [
-            'total_completions' => $totalCompletions,
-            'total_earnings' => number_format($totalEarnings, 2),
-            'this_month' => $thisMonth,
-        ];
 
         return $referrals;
     }

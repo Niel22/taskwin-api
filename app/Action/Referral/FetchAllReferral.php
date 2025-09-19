@@ -33,17 +33,17 @@ class FetchAllReferral{
 
         if ($promoterId) {
             $query->where('promoter_id', $promoterId);
+            
+            $total = $query->count();
+            $completed = $query->where('completed', true)->count();
+            $conversionRate = $total > 0 ? round(($completed / $total) * 100, 2) : 0;
+    
+            $referrals->stats = [
+                'total_clicks' => $total,
+                'completed' => $completed,
+                'conversion_rate' => $conversionRate,
+            ];
         }
-
-        $total = $query->count();
-        $completed = $query->where('completed', true)->count();
-        $conversionRate = $total > 0 ? round(($completed / $total) * 100, 2) : 0;
-
-        $referrals->stats = [
-            'total_clicks' => $total,
-            'completed' => $completed,
-            'conversion_rate' => $conversionRate,
-        ];
 
         return $referrals;
     }
