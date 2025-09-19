@@ -18,6 +18,7 @@ class ReferralResource extends JsonResource
             'id' => $this->id,
             'promoter' => new PromoterResource($this->promoter),
             'location' => $this->location,
+            'device_fingerprint' => $this->device_fingerprint,
             'ip_address' => $this->ip_address,
             'device' => $this->device,
             'name' => $this->name,

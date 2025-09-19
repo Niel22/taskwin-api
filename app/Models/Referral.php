@@ -10,6 +10,7 @@ class Referral extends Model
         'promoter_id',
         'location',
         'ip_address',
+        'device_fingerprint',
         'device',
         'name',
         'email',
