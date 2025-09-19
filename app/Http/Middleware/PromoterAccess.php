@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class PromoterAccess
     {
         $user = Auth::user();
 
-        if ($user && $user->role === 'promoter' && !$user->active) {
+        if ($user && $user->role === (RoleEnum::PROMOTER)->value && !$user->active) {
             return response()->json([
                 'message' => 'Your account has been disabled. Contact admin.'
             ], 403);
