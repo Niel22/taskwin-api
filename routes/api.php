@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromoterController;
 use App\Http\Controllers\ReferralController;
@@ -27,6 +28,8 @@ Route::middleware('json')->group(function(){
     Route::middleware(['auth:sanctum'])->group(function(){
         Route::get('clicks', [ReferralController::class, 'fetchAllClicks']);
         Route::get('completions', [ReferralController::class, 'fetchAllCompletions']);
+
+        Route::get('/dashboard-summary', [DashboardController::class, 'index']);
 
         Route::patch('profile', [ProfileController::class, 'update']);
         Route::patch('change-password', [ProfileController::class, 'changePassword']);
