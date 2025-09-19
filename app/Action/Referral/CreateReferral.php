@@ -13,8 +13,8 @@ class CreateReferral{
         
     }
 
-    public function execute($request){
-        $promoter = User::where('referral_code', $request->referral_code)->first();
+    public function execute($code, $request){
+        $promoter = User::where('referral_code', $code)->first();
 
         if($promoter){
             $referral = Referral::firstOrCreate(

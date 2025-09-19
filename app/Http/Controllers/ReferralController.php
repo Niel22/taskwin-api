@@ -17,8 +17,8 @@ class ReferralController extends Controller
 {
     use ApiResponse;
 
-    public function store(CreateReferralRequest $request, CreateReferral $action){
-        if($action->execute($request)){
+    public function store($code, Request $request, CreateReferral $action){
+        if($action->execute($code, $request)){
             return $this->success([], 'referral Created');
         }
 
