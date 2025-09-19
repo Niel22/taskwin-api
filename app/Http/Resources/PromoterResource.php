@@ -22,6 +22,7 @@ class PromoterResource extends JsonResource
             'role' => $this->role,
             'clicks' => $this->clicks->count(),
             'completed' => $this->completed->count(),
+            'earnings' => $this->completed->count() * 10,
             'referral_code' => $this->referral_code,
             'created_at' => $this->created_at->format("D M d, Y | h:i A"),
         ];
