@@ -20,7 +20,7 @@ class PromoterController extends Controller
             return $this->success(new PromoterCollection($promoter), 'All Promoters');
         }
 
-        return $this->error('No Promoters Found');
+        return $this->success([], 'No Promoters Found');
     }
 
     public function show($id, FetchSinglePromoter $action){
