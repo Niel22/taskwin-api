@@ -23,6 +23,7 @@ Route::middleware('json')->group(function(){
     Route::middleware(['auth:sanctum', 'admin'])->group(function(){
         Route::apiResource('promoters', PromoterController::class)->only(['index', 'show', 'destroy']);
         Route::patch('/promoters/{id}/disable', [PromoterController::class, 'disable']);
+        Route::delete('/referrals/{id}', [ReferralController::class, 'destroy']);
     });
     
     Route::middleware(['auth:sanctum', 'promoter'])->group(function(){

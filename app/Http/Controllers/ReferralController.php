@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Action\Referral\CreateReferral;
+use App\Action\Referral\DeleteReferral;
 use App\Action\Referral\FetchAllReferral;
 use App\Action\Referral\FetchCompletedReferral;
 use App\Action\Referral\UpdateReferral;
@@ -47,5 +48,13 @@ class ReferralController extends Controller
         }
 
         return $this->success([], 'No Referrals Completions Found');
+    }
+
+    public function destroy($id, DeleteReferral $action){
+        if($action->execute($id)){
+            return $this->success([], "Referral Deleted");
+        }
+
+        return $this->error('Referral Not Found');
     }
 }
