@@ -25,7 +25,12 @@ Route::middleware('json')->group(function(){
         Route::patch('/promoters/{id}/disable', [PromoterController::class, 'disable']);
     });
     
-    Route::middleware(['auth:sanctum'])->group(function(){
+    Route::middleware(['auth:sanctum', 'promoter'])->group(function(){
+        Route::get('/check', function(){
+            return response()->json([
+                'message' => 'Account Checked.'
+            ], 200);
+        });
         Route::get('clicks', [ReferralController::class, 'fetchAllClicks']);
         Route::get('completions', [ReferralController::class, 'fetchAllCompletions']);
 
