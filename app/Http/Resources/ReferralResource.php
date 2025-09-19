@@ -33,7 +33,7 @@ class ReferralResource extends JsonResource
             'payment_code' => $this->payment_code,
             'completed' => $this->completed ? "completed" : "clicked",
             'created_at' => $this->created_at->format("D M d, Y | h:i A"),
-            'updated_at' => $this->created_at->format("D M d, Y | h:i A"),
+            'updated_at' => $this->updated_at->format("D M d, Y | h:i A"),
         ];
     }
 }
