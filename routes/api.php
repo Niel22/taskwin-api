@@ -16,8 +16,8 @@ Route::middleware('json')->group(function(){
     Route::post('/login', [AuthController::class, 'store']);
     Route::post('/register', [AuthController::class, 'create']);
 
-    Route::get('/referrals/{code}', [ReferralController::class, 'store']);
-    Route::post('/referrals', [ReferralController::class, 'update']);
+    Route::post('/referrals', [ReferralController::class, 'store']);
+    Route::patch('/referrals', [ReferralController::class, 'update']);
     
     Route::middleware(['auth:sanctum', 'admin'])->group(function(){
         Route::apiResource('promoters', PromoterController::class)->only(['index', 'show', 'destroy']);

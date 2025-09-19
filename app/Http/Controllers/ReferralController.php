@@ -7,6 +7,7 @@ use App\Action\Referral\FetchAllReferral;
 use App\Action\Referral\FetchCompletedReferral;
 use App\Action\Referral\UpdateReferral;
 use App\Http\Requests\CompleteTaskRequest;
+use App\Http\Requests\CreateReferralRequest;
 use App\Http\Resources\ReferralCollection;
 use App\Http\Resources\ReferralResource;
 use App\Traits\ApiResponse;
@@ -16,8 +17,8 @@ class ReferralController extends Controller
 {
     use ApiResponse;
 
-    public function store($code, Request $request, CreateReferral $action){
-        if($action->execute($code, $request)){
+    public function store(CreateReferralRequest $request, CreateReferral $action){
+        if($action->execute($request)){
             return $this->success([], 'referral Created');
         }
 
