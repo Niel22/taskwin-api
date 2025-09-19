@@ -13,10 +13,14 @@ class UpdateReferral{
     }
 
     public function execute($request){
+        $fingerprint = $request->header('X-Device-Fingerprint') ?? "";
         $referral = Referral::where('ip_address', $request->ip())
+            ->orWhere('device_fingerprint', $fingerprint)
             ->where('completed', false)
             ->latest()
             ->first();
+        
+        
 
         $data = [
             'name' => $request->name,
@@ -26,11 +30,13 @@ class UpdateReferral{
             'age' => $request->age,
             'profession' => $request->profession,
             'gender' => $request->gender,
-            'proof' => $request->proof,
             'telegram' => $request->telegram,
             'payment_code' => Str::random(8),
             'completed' => true,
         ];
+        
+        $path = $request->proof->store('proof', 'public');
+        $data['proof'] = $path;
 
         if($referral){
             $referral->update($data);
