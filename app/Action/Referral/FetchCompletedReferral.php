@@ -10,20 +10,46 @@ class FetchCompletedReferral{
     public function execute(){
 
         if(!Auth::user()->isAdmin()){
-            $referral = Referral::where('promoter_id', Auth::id())->where('completed', true)->latest()->paginate(10);
+            $referrals = Referral::where('promoter_id', Auth::id())->where('completed', true)->latest()->paginate(10);
 
-            if($referral->isNotEmpty()){
-                return $referral;
+            if($referrals->isNotEmpty()){
+                return $this->appendStats($referrals, Auth::id());
             }
 
             return false;
         }
 
-        $referral = Referral::with('promoter')->where('completed', true)->latest()->paginate(10);
-        if($referral->isNotEmpty()){
-            return $referral;
+        $referrals = Referral::with('promoter')->where('completed', true)->latest()->paginate(10);
+        if($referrals->isNotEmpty()){
+            return $this->appendStats($referrals);
         }
 
         return false;
+    }
+
+    private function appendStats($referrals, $promoterId = null)
+    {
+        $query = Referral::query();
+
+        if ($promoterId) {
+            $query->where('promoter_id', $promoterId);
+        }
+
+        $totalCompletions = $query->where('completed', true)->count();
+        $totalEarnings = $totalCompletions * 10;
+        
+        $thisMonth = (clone $query)
+            ->where('completed', true)
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+
+        $referrals->stats = [
+            'total_completions' => $totalCompletions,
+            'total_earnings' => number_format($totalEarnings, 2),
+            'this_month' => $thisMonth,
+        ];
+
+        return $referrals;
     }
 }
