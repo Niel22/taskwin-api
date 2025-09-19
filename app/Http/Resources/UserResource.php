@@ -19,7 +19,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'role' => $this->role,
-            'referral_code' => $this->referral_code
+            'referral_code' => $this->referral_code,
+            'active' => $this->active ? true : false,
         ];
     }
 }
