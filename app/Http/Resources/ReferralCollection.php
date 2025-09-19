@@ -30,6 +30,7 @@ class ReferralCollection extends ResourceCollection
                 'prev' => $this->previousPageUrl(),
                 'next' => $this->nextPageUrl(),
             ],
+            'stats' => $this->stats
         ];
     }
 }
