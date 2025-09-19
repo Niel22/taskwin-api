@@ -21,6 +21,7 @@ class PromoterResource extends JsonResource
             'active' => $this->active ? 'Active' : "Unactive",
             'role' => $this->role,
             'referral_code' => $this->referral_code,
+            'created_at' => $this->created_at->format("D M d, Y | h:i A"),
         ];
     }
 }
