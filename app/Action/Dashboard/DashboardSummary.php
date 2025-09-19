@@ -12,7 +12,7 @@ class DashboardSummary{
         $query = Referral::query();
 
         if (!$user->isAdmin()) {
-            $query->where('promoter_id', $$user->id);
+            $query->where('promoter_id', $user->id);
         }
 
         $total = $query->count();
