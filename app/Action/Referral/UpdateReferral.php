@@ -39,6 +39,9 @@ class UpdateReferral{
         $data['proof'] = $path;
 
         if($referral){
+            if($referral->payment_code){
+                return $referral->payment_code;
+            }
             $referral->update($data);
             return $referral->payment_code;
         }
