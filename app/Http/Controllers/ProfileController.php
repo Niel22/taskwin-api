@@ -6,6 +6,7 @@ use App\Action\Profile\ChangePassword;
 use App\Action\Profile\UpdateProfile;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\UserResource;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request, UpdateProfile $action){
         if($data = $action->execute($request->all())){
-            return $this->success($data, 'Profile Updated');
+            return $this->success(new UserResource($data), 'Profile Updated');
         }
 
         return $this->error('Problem Updating Profile');
