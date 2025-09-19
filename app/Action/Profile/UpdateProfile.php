@@ -11,7 +11,8 @@ class UpdateProfile{
         $user = User::find(Auth::id());
 
         if(!empty($user)){
-            return $user->update($request);
+            $user->update($request);
+            return $user->fresh();
         }
 
         return false;

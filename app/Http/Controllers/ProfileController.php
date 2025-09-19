@@ -14,8 +14,8 @@ class ProfileController extends Controller
     use ApiResponse;
 
     public function update(UpdateProfileRequest $request, UpdateProfile $action){
-        if($action->execute($request->all())){
-            return $this->success([], 'Profile Updated');
+        if($data = $action->execute($request->all())){
+            return $this->success($data, 'Profile Updated');
         }
 
         return $this->error('Problem Updating Profile');
