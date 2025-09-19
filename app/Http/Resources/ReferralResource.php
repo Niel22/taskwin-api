@@ -29,7 +29,7 @@ class ReferralResource extends JsonResource
             'age' => $this->age,
             'profession' => $this->profession,
             'gender' => $this->gender,
-            'proof' => Storage::url($this->proof),
+            'proof' => url(Storage::url($this->proof)),
             'telegram' => $this->telegram,
             'payment_code' => $this->payment_code,
             'completed' => $this->completed ? "completed" : "clicked",
