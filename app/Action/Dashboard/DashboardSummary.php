@@ -21,10 +21,10 @@ class DashboardSummary{
         $totalEarnings = $completed * 10;
 
         return [
-            $total,
-            $completed,
-            number_format($conversionRate, 2),
-            $totalEarnings
+            "total" => $total,
+            "completed" => $completed,
+            "conversionRate" => number_format($conversionRate, 2),
+            "totalEarnings" => $totalEarnings
         ];
     }
 }
