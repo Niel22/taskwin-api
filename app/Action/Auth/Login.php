@@ -18,6 +18,7 @@ class Login{
                     'name' => $user->name,
                     'email' => $user->email,
                     'role' => $user->role,
+                    'active' => $user->active ? true : false,
                     'referral_code' => $user->referral_code,
                     'token' => $token->plainTextToken
                 ];
