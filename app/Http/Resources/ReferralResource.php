@@ -32,7 +32,7 @@ class ReferralResource extends JsonResource
             'telegram' => $this->telegram,
             'payment_code' => $this->payment_code,
             'completed' => $this->completed ? "completed" : "Clicked",
-            'created_at' => $this->created_at->forat("D M d, Y | h:i A"),
+            'created_at' => $this->created_at->format("D M d, Y | h:i A"),
         ];
     }
 }
