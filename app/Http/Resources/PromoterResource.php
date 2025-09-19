@@ -20,6 +20,8 @@ class PromoterResource extends JsonResource
             'email' => $this->email,
             'active' => $this->active ? 'Active' : "Unactive",
             'role' => $this->role,
+            'clicks' => $this->clicks,
+            'completed' => $this->completed,
             'referral_code' => $this->referral_code,
             'created_at' => $this->created_at->format("D M d, Y | h:i A"),
         ];

@@ -75,4 +75,12 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->role === "admin";
     }
+
+    public function clicks(){
+        return $this->hasMany(Referral::class, 'promoter_id');
+    }
+
+    public function completed(){
+        return $this->hasMany(Referral::class, 'promoter_id')->where('completed', true);
+    }
 }

@@ -8,7 +8,7 @@ use App\Models\User;
 class FetchAllPromoter{
 
     public function execute(){
-        $promoters = User::where('role', (RoleEnum::PROMOTER)->value)->paginate(10);
+        $promoters = User::withCount(['clicks', 'completed'])->where('role', (RoleEnum::PROMOTER)->value)->paginate(10);
 
         if($promoters->isNotEmpty()){
             return $promoters;
