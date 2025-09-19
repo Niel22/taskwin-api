@@ -35,13 +35,14 @@ class UpdateReferral{
             'completed' => true,
         ];
         
-        $path = $request->proof->store('proof', 'public');
-        $data['proof'] = $path;
-
+        
         if($referral){
             if($referral->payment_code){
                 return $referral->payment_code;
             }
+            
+            $path = $request->proof->store('proof', 'public');
+            $data['proof'] = $path;
             $referral->update($data);
             return $referral->payment_code;
         }

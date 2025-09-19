@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ReferralResource extends JsonResource
 {
@@ -28,7 +29,7 @@ class ReferralResource extends JsonResource
             'age' => $this->age,
             'profession' => $this->profession,
             'gender' => $this->gender,
-            'proof' => $this->proof,
+            'proof' => Storage::url($this->proof),
             'telegram' => $this->telegram,
             'payment_code' => $this->payment_code,
             'completed' => $this->completed ? "completed" : "clicked",
