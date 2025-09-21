@@ -43,11 +43,12 @@ class UpdateReferral{
                 return $referral->payment_code;
             }
             
-            $path = $request->proof->store('proof', 'public');
-            $data['proof'] = $path;
             $referral->update($data);
             return $referral->payment_code;
         }
+
+        $path = $request->proof->store('proof', 'public');
+        $data['proof'] = $path;
 
         $data['promoter_id'] = null;
         $data['device_fingerprint'] = $fingerprint;
