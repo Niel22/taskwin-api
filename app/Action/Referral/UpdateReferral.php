@@ -13,7 +13,7 @@ class UpdateReferral{
     }
 
     public function execute($request){
-        $fingerprint = $request->header('X-Device-Fingerprint') ?? "";
+        $fingerprint = $request->fingerprint;
         $referral = Referral::where('ip_address', $request->ip())
             ->orWhere('device_fingerprint', $fingerprint)
             ->where('completed', false)
