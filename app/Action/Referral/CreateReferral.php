@@ -19,7 +19,7 @@ class CreateReferral{
 
         if($promoter){
             $ip = $request->ip();
-            $fingerprint = $request->header('X-Device-Fingerprint');
+            $fingerprint = $request->fingerprint;
             $userAgent = $this->agent;
             $location = $this->geo->getLocation($ip);
 
