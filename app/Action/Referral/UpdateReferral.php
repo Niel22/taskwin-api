@@ -48,6 +48,7 @@ class UpdateReferral{
         }
 
         $data['promoter_id'] = null;
+        $data['device_fingerprint'] = $fingerprint;
         $data['ip_address'] = $request->ip();
         $data['device'] = $request->userAgent();
         $data['location'] = $this->geo->getLocation($request->ip());
