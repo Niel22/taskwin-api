@@ -31,6 +31,7 @@ class CompleteTaskRequest extends FormRequest
             'gender' => 'required|in:male,female,other',
             'proof' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'telegram' => 'required|string|max:50',
+            'device_fingerprint' => 'required|string',
         ];
     }
 }
