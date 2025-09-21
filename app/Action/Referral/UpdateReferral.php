@@ -5,15 +5,17 @@ namespace App\Action\Referral;
 use App\Models\Referral;
 use App\Services\GeoLocationService;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 
 class UpdateReferral{
-    public function  __construct(public GeoLocationService $geo)
+    public function  __construct(public GeoLocationService $geo, public Agent $agent)
     {
         
     }
 
     public function execute($request){
         $fingerprint = $request->fingerprint;
+        $userAgent = $this->agent;
         $referral = Referral::where('ip_address', $request->ip())
             ->orWhere('device_fingerprint', $fingerprint)
             ->where('completed', false)
@@ -50,7 +52,7 @@ class UpdateReferral{
         $data['promoter_id'] = null;
         $data['device_fingerprint'] = $fingerprint;
         $data['ip_address'] = $request->ip();
-        $data['device'] = $request->userAgent();
+        $data['device'] = $userAgent->browser() . '/' . $userAgent->platform();
         $data['location'] = $this->geo->getLocation($request->ip());
 
         $newReferral = Referral::create($data);
