@@ -20,7 +20,7 @@ class ContactFormController extends Controller
             return $this->success(new ContactFormCollection($contact), 'All Contact Form');
         }
 
-        return $this->error('No Contact Form Found');
+        return $this->success([], 'No Contact Form Found');
     }
 
     public function store(StoreContactFormRequest $request, CreateContactForm $action){
