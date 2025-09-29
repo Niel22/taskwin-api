@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromoterController;
@@ -14,6 +15,7 @@ Route::middleware('json')->group(function(){
         return $request->user();
     })->middleware('auth:sanctum');
     
+    Route::apiResource('contact-forms', ContactFormController::class)->only(['store']);
     Route::post('/login', [AuthController::class, 'store']);
     Route::post('/register', [AuthController::class, 'create']);
 
@@ -32,6 +34,8 @@ Route::middleware('json')->group(function(){
                 'message' => 'Account Checked.'
             ], 200);
         });
+
+        Route::apiResource('contact-forms', ContactFormController::class)->only(['index', 'destroy']);
         Route::get('clicks', [ReferralController::class, 'fetchAllClicks']);
         Route::get('completions', [ReferralController::class, 'fetchAllCompletions']);
 
