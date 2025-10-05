@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Action\Link\FetchAllLink;
+use App\Action\Link\FetchSingleLink;
 use App\Action\Link\UpdateLink;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Http\Resources\LinkResource;
@@ -19,6 +20,15 @@ class LinkController extends Controller
         }
 
         return $this->success([], "No Link Found");
+    }
+
+    public function show(string $slug, FetchSingleLink $action){
+
+        if($link = $action->execute($slug)){
+            return $this->success(new LinkResource($link), "Single Link");
+        }
+
+        return $this->success([], "Link Not Found");
     }
 
     public function update($slug, UpdateLinkRequest $request, UpdateLink $action){
