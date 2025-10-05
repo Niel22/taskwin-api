@@ -29,6 +29,11 @@ class LinkSeeder extends Seeder
                 'slug' => 'email',
                 'url' => 'mailto:support@tradeswin.com',
             ],
+            [
+                'title' => 'Task',
+                'slug' => 'task',
+                'url' => 'https://wa.me/2348012345678',
+            ],
         ];
 
         foreach ($links as $link) {
