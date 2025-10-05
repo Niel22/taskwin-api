@@ -17,6 +17,7 @@ Route::middleware('json')->group(function(){
     })->middleware('auth:sanctum');
     
     Route::apiResource('contact-forms', ContactFormController::class)->only(['store']);
+    Route::apiResource('links', LinkController::class)->only(['index', 'show']);
     Route::post('/login', [AuthController::class, 'store']);
     Route::post('/register', [AuthController::class, 'create']);
 
@@ -27,7 +28,7 @@ Route::middleware('json')->group(function(){
         Route::apiResource('promoters', PromoterController::class)->only(['index', 'show', 'destroy']);
         Route::patch('/promoters/{id}/disable', [PromoterController::class, 'disable']);
         Route::delete('/referrals/{id}', [ReferralController::class, 'destroy']);
-        Route::apiResource('links', LinkController::class)->only(['index', 'show', 'update']);
+        Route::apiResource('links', LinkController::class)->only(['update']);
     });
     
     Route::middleware(['auth:sanctum', 'promoter'])->group(function(){
