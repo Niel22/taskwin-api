@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::create([
+        User::firstOrCreate(
+        ['email' => 'sysadmin@taskwin.com'],    
+        [
             'name' => 'Taskwin Administrator',
-            'email' => 'sysadmin@taskwin.com',
             'password' => 'password$123',
             'role' => 'admin'
+        ]);
+
+        $this->call([
+            LinkSeeder::class
         ]);
     }
 }

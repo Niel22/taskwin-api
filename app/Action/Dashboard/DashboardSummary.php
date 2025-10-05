@@ -19,7 +19,7 @@ class DashboardSummary{
         }
 
         $total = $query->count();
-        $completed = $query->where('completed', true)->count();
+        $completed = $query->whereNotNull('promoter_id')->where('completed', true)->count();
         $conversionRate = $total > 0 ? round(($completed / $total) * 100, 2) : 0;
         $totalPayouts = $completed * 10;
 

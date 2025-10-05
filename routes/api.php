@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromoterController;
 use App\Http\Controllers\ReferralController;
@@ -26,6 +27,7 @@ Route::middleware('json')->group(function(){
         Route::apiResource('promoters', PromoterController::class)->only(['index', 'show', 'destroy']);
         Route::patch('/promoters/{id}/disable', [PromoterController::class, 'disable']);
         Route::delete('/referrals/{id}', [ReferralController::class, 'destroy']);
+        Route::apiResource('links', LinkController::class)->only(['index', 'update']);
     });
     
     Route::middleware(['auth:sanctum', 'promoter'])->group(function(){
