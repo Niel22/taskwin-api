@@ -23,7 +23,7 @@ class CompleteTaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
             'country' => 'required|string|max:100',
             'whatsapp' => 'required|string|max:20',
             'age' => 'required|integer|min:1|max:120',
